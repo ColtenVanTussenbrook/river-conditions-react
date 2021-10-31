@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import RiverSelect from './components/RiverSelect';
+import StateSelect from './components/StateSelect';
+import DropdownArrow from './components/DropdownArrow';
 import './App.css';
 
-function App() {
+
+const App = () => {
+  const [option, setOption] = useState("state");
+
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setOption(e.target.value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className="bg-gray-100 p-10">
+      <title>River Conditions</title>
+      <h1 className="text-2xl">River Conditions</h1>
+      <div className="form-block">
+        <label>Find by:</label>
+        <div className="relative w-64">
+          <select className="dropdown-select" value={option} onChange={handleChange}>
+            <option value="state">State</option>
+            <option value="popular-rivers">Popular Rivers</option>
+          </select> 
+          <DropdownArrow />
+        </div>
+      </div>
+
+      {option === "state" ? <StateSelect /> : <RiverSelect />}
+    </main>
+  )
 }
 
-export default App;
+export default App
+
