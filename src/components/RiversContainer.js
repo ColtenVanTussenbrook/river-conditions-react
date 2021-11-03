@@ -5,15 +5,19 @@ import SearchRiver from './SearchRiver'
 import * as JsSearch from 'js-search'
 
 const RiversContainer = (props) => {
-  const unitCode = 'ft3/s' //provided by USGS
+  const cfs = 'ft3/s' //provided by USGS
+  const height = 'ft'
   const [searchQuery, setSearchQuery] = useState('')
   const [rivers, setRivers] = useState([])
 
+  const initData = props.data.riverData
+
   useEffect(() => {
-    if(props.data.riverData) {
-      const riversArr = props.data.riverData.value.timeSeries.filter(river => {
-        if (river.variable.unit.unitCode === unitCode) {
-          return true;
+    if(initData) {
+      const riversArr = initData.value.timeSeries.filter(river => {
+        // set up data with flow
+        if (river.variable.unit.unitCode === cfs) {
+          return true
         } else return false;
       })
   
@@ -21,6 +25,8 @@ const RiversContainer = (props) => {
         return {
           'name': river.sourceInfo.siteName,
           'flow': river.values[0].value[0].value,
+          'latitude': river.sourceInfo.geoLocation.geogLocation.latitude,
+          'longitude': river.sourceInfo.geoLocation.geogLocation.longitude,
           'id': river.sourceInfo.siteCode[0].value
         }
       })
@@ -29,7 +35,7 @@ const RiversContainer = (props) => {
 
     }
 
-  }, [props.data.riverData]);
+  }, [initData]);
 
     const search = new JsSearch.Search('name')
     search.addIndex('name')
