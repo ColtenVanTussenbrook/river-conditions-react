@@ -9,7 +9,6 @@ const App = () => {
   const [option, setOption] = useState("state");
 
   const handleChange = (e) => {
-    console.log(e.target.value)
     setOption(e.target.value);
   }
 
