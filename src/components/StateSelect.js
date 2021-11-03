@@ -20,7 +20,7 @@ const StateSelect = () => {
     <>
       <div className="form-block">
         <label>Choose State: </label>
-        <div className="relative w-64">
+        <div className="relative w-full md:w-64">
           <select onChange={handleChange} className="dropdown-select">
             {states.map((s, i) => {
               return <option value={s.toLowerCase()} key={i}>{s}</option>

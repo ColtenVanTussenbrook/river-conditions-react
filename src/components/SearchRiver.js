@@ -17,7 +17,7 @@ const SearchRiver = (props) => {
           onInput={e => props.setSearchQuery(e.target.value)}
           type="text"
           placeholder={`Search ${searchWord} Rivers`}
-          className="h-10 w-64 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight"
+          className="h-10 w-full md:w-64 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight"
         />
       {/* <button type="submit">Search</button> */}
     </form>
