@@ -6,7 +6,6 @@ import * as JsSearch from 'js-search'
 
 const RiversContainer = (props) => {
   const cfs = 'ft3/s' //provided by USGS
-  const height = 'ft'
   const [searchQuery, setSearchQuery] = useState('')
   const [rivers, setRivers] = useState([])
 
