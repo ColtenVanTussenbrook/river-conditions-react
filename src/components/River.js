@@ -17,8 +17,8 @@ const River = (props) => {
   }
 
   return (
-    <div className="bg-gray-800 text-white w-full md:w-6/12 p-4 mb-4 rounded-2xl">
-      <p><span className="font-bold">River Name:</span> {river}</p>
+    <div className="bg-gray-800 text-white w-full p-4 mb-4 rounded-2xl text-lg">
+      <p>{river}</p>
       <p><span className="font-bold">Flow:</span> {flow}/cfs</p>
       {
         expand
