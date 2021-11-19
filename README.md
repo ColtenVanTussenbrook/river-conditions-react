@@ -1,6 +1,10 @@
+#River Conditions
+
+https://riverconditions.com
+
 React App for rendering data from USGS website.
 
-With such an overload of data on the site, and the hard-to-navigate UI, it's difficult to get on the site and quickly get the basic data a fly fisherman might want on a river (i.e. the current flows).
+With such an overload of data on the USGS site, and the hard-to-navigate UI, it's difficult to get on the site and quickly get the basic data a fly fisherman might want to know about a river (i.e. the current flows).
 
 I built this so a user can quickly find the river they're looking for and get only the data they actually want.
 
