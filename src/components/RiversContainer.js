@@ -6,29 +6,99 @@ import * as JsSearch from 'js-search'
 
 const RiversContainer = (props) => {
   const cfs = 'ft3/s' //provided by USGS
+  const height = 'ft';
+  const temp = 'deg C';
   const [searchQuery, setSearchQuery] = useState('')
   const [rivers, setRivers] = useState([])
 
-  const initData = props.data.riverData
+  const initData = props.data.riverData;
+
+  const convertToF = (celsius) => {
+    return  celsius * 9/5 + 32;
+  }
+  
+  convertToF(30);
 
   useEffect(() => {
     if(initData) {
-      const riversArr = initData.value.timeSeries.filter(river => {
-        // set up data with flow
-        if (river.variable.unit.unitCode === cfs) {
-          return true
-        } else return false;
-      })
-  
-      const riversData = riversArr.map(river => {
-        return {
-          'name': river.sourceInfo.siteName,
-          'flow': river.values[0].value[0].value,
-          'latitude': river.sourceInfo.geoLocation.geogLocation.latitude,
-          'longitude': river.sourceInfo.geoLocation.geogLocation.longitude,
-          'id': river.sourceInfo.siteCode[0].value
+      console.log(initData.value)
+
+      const riversData = [];
+      let queryInfo = initData.value.queryInfo;
+      let state = '';
+
+      if (queryInfo.criteria.locationParam === '[]') {
+        state = queryInfo.note[0].value.match(/\[(.*?)\]/);
+
+        if (state) {
+          state = state[1];
+        } else state = '';
+      }
+
+      initData.value.timeSeries.forEach(currRiver => {
+        let id = currRiver.sourceInfo.siteCode[0].value;
+        let rivValue = currRiver.values[0].value[0].value;
+        let name = currRiver.sourceInfo.siteName;
+        
+        if (currRiver.variable.unit.unitCode === height) {
+          if (riversData.some(river => river.id === id)) {
+            for (let i in riversData) {
+              if (riversData[i].id === id) {
+                riversData[i].height = rivValue;
+                break;
+             }
+            }
+          } else {
+            let riverObj = {
+              'name': name,
+              'id': id,
+              'height': rivValue,
+              'state': state,
+            }
+            riversData.push(riverObj)
+          }
+        }
+
+        if (currRiver.variable.unit.unitCode === cfs) {
+          if (riversData.some(river => river.id === id)) {
+            for (let i in riversData) {
+              if (riversData[i].id === id) {
+                riversData[i].flow = rivValue;
+                break;
+             }
+            }
+          } else {
+            let riverObj = {
+              'name': name,
+              'id': id,
+              'flow': rivValue,
+              'state': state,
+            }
+            riversData.push(riverObj)
+          }
+        }
+
+        if (currRiver.variable.unit.unitCode === temp) {
+          if (riversData.some(river => river.id === id)) {
+            for (let i in riversData) {
+              if (riversData[i].id === id) {
+                riversData[i].temp = convertToF(rivValue);
+                break;
+             }
+            }
+          } else {
+            let riverObj = {
+              'name': name,
+              'id': id,
+              'temp': convertToF(rivValue),
+              'state': state
+            }
+            riversData.push(riverObj)
+          }
         }
       })
+
+      console.log(riversData)
 
       setRivers(riversData)
 

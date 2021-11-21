@@ -14,6 +14,11 @@ const StateSelect = () => {
     'Utah',
     'Wyoming',
     'Idaho',
+    'Oregon',
+    'Washington',
+    'Arizona',
+    'Colorado',
+    'Montana',
   ];
 
   return (

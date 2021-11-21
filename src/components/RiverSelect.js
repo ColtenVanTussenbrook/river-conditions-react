@@ -19,7 +19,7 @@ const RiverSelect = () => {
   useEffect(() => {
     let mounted = true
 
-    axios.get(` https://waterservices.usgs.gov/nwis/dv/?format=json&sites=${siteCodes}&siteStatus=active&siteType=ST`).then(
+    axios.get(` https://waterservices.usgs.gov/nwis/iv/?format=json&sites=${siteCodes}&parameterCd=00060,00065,00010&siteStatus=active&siteType=ST`).then(
       (response) => {
         if (mounted) {
           setRiverData( { riverData: response.data });

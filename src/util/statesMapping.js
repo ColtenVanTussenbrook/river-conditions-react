@@ -2,7 +2,12 @@ function StatesMapping () {
     return {
       "ut":"utah",
       "id":"idaho",
-      "wy":"wyoming"
+      "wy":"wyoming",
+      "or":"oregon",
+      "wa":"washington",
+      "az":"arizona",
+      "co":"colorado",
+      "mt":"montana",
     }
 }
 
